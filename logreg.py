@@ -9,7 +9,7 @@ Lecture 03
 import os
 import tensorflow as tf
 import time
-import examples.utils as utils
+import utils
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
