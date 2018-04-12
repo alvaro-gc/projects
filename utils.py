@@ -131,7 +131,7 @@ def read_mnist(path, flatten=True, num_train=55000):
 
 def get_mnist_dataset(batch_size):
     # Step 1: Read in data
-    mnist_folder = 'data/mnist'
+    mnist_folder = 'mnist'
     download_mnist(mnist_folder)
     train, val, test = read_mnist(mnist_folder, flatten=False)
 
