@@ -2,8 +2,8 @@ import os
 import time
 import numpy as np
 import tensorflow as tf
-from style_transfer_project import load_vgg
-from style_transfer_project import utils
+import load_vgg
+import utils
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 

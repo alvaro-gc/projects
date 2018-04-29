@@ -10,7 +10,7 @@ import numpy as np
 import scipy.io
 import tensorflow as tf
 
-from style_transfer_project import utils
+import utils
 
 # VGG-19 parameters file
 VGG_DOWNLOAD_LINK = 'http://www.vlfeat.org/matconvnet/models/imagenet-vgg-verydeep-19.mat'
