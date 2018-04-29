@@ -184,6 +184,6 @@ class StyleTransfer(object):
 
 if __name__ == '__main__':
     setup()
-    machine = StyleTransfer('content/dog.jpg', 'styles/cubist.jpg', 700, 500)
+    machine = StyleTransfer('/content/projects/style_transfer_project/content/dog.jpg', 'styles/cubist.jpg', 700, 500)
     machine.build()
     machine.train(300, 'cubist')
