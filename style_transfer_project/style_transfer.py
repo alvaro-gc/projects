@@ -7,9 +7,9 @@ from style_transfer_project import utils
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
-def setup(name_folder):
+def setup():
     utils.safe_mkdir('checkpoints')
-    utils.safe_mkdir(name_folder)
+    utils.safe_mkdir('output')
 
 
 # try removing the object argument
@@ -180,29 +180,7 @@ class StyleTransfer(object):
 
 
 if __name__ == '__main__':
-    n_iter = 1
-
-    setup('guernica')
+    setup()
     machine = StyleTransfer('content/hidelberg.jpg', 'styles/guernica.jpg', 700, 500)
     machine.build()
-    machine.train(n_iter, 'guernica')
-
-    setup('cubist')
-    machine = StyleTransfer('content/hidelberg.jpg', 'styles/cubist.jpg', 700, 500)
-    machine.build()
-    machine.train(n_iter, 'cubist')
-
-    setup('harlequin')
-    machine = StyleTransfer('content/hidelberg.jpg', 'styles/harlequin.jpg', 700, 500)
-    machine.build()
-    machine.train(n_iter, 'harlequin')
-
-    setup('pattern')
-    machine = StyleTransfer('content/hidelberg.jpg', 'styles/pattern.jpg', 700, 500)
-    machine.build()
-    machine.train(n_iter, 'pattern')
-
-    setup('starry_night')
-    machine = StyleTransfer('content/hidelberg.jpg', 'styles/starry_night.jpg', 700, 500)
-    machine.build()
-    machine.train(n_iter, 'starry_night')
+    machine.train(10, 'guernica')
