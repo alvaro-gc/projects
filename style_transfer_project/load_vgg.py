@@ -9,7 +9,6 @@ cs20.stanford.edu
 import numpy as np
 import scipy.io
 import tensorflow as tf
-
 import utils
 
 # VGG-19 parameters file

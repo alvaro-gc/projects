@@ -6,6 +6,8 @@ import load_vgg
 import utils
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+print(dir_path)
 
 def setup():
     utils.safe_mkdir('checkpoints')
@@ -29,6 +31,7 @@ class StyleTransfer(object):
         self.style_layers = ['conv1_1', 'conv2_1', 'conv3_1', 'conv4_1', 'conv5_1']
         self.content_w = 0.01
         self.style_w = 1
+
         self.style_layer_w = [0.5, 1.0, 1.5, 3.0, 4.0]
         self.gstep = tf.Variable(0, dtype=tf.int32, trainable=False, name='global_step')
         self.lr = 2.0
@@ -172,7 +175,7 @@ class StyleTransfer(object):
                 print('   Took: {} seconds'.format(time.time() - start_time))
                 start_time = time.time()
 
-                filename = name_graphs+'/%d.png' % (index)
+                filename = 'output/%d.png' % (index)
                 utils.save_image(filename, gen_image)
 
                 if (index + 1) % 20 == 0:
@@ -181,6 +184,6 @@ class StyleTransfer(object):
 
 if __name__ == '__main__':
     setup()
-    machine = StyleTransfer('~/projects/style_transfer_project/content/hidelberg.jpg', 'styles/guernica.jpg', 700, 500)
+    machine = StyleTransfer('content/dog.jpg', 'styles/cubist.jpg', 700, 500)
     machine.build()
-    machine.train(10, 'guernica')
+    machine.train(300, 'cubist')
