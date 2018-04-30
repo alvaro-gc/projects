@@ -29,7 +29,9 @@ class StyleTransfer(object):
 
         self.content_layer = 'conv4_2'
         self.style_layers = ['conv1_1', 'conv2_1', 'conv3_1', 'conv4_1', 'conv5_1']
-        self.content_w = 0.01
+        # self.content_w = 0.01
+        self.content_w = 1
+
         self.style_w = 1
 
         self.style_layer_w = [0.5, 1.0, 1.5, 3.0, 4.0]
@@ -184,6 +186,6 @@ class StyleTransfer(object):
 
 if __name__ == '__main__':
     setup()
-    machine = StyleTransfer('/content/projects/style_transfer_project/content/dog.jpg', 'styles/cubist.jpg', 700, 500)
+    machine = StyleTransfer('dog.jpg', 'starry_night.jpg', 700, 500)
     machine.build()
-    machine.train(300, 'cubist')
+    machine.train(300, 'starry_same_weights_1')
