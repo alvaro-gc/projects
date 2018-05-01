@@ -6,8 +6,8 @@ import load_vgg
 import utils
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
-print(dir_path)
+path = os.getcwd()
+
 
 def setup():
     utils.safe_mkdir('checkpoints')
@@ -166,28 +166,30 @@ class StyleTransfer(object):
             start_time = time.time()
             for index in range(initial_step, n_iters):
                 sess.run(self.opt)
-                gen_image, total_loss, summary = sess.run([self.input_img,
-                                                           self.total_loss,
-                                                           self.summary_op])
+                total_loss, summary = sess.run([self.total_loss,
+                                                self.summary_op])
 
-                gen_image = gen_image + self.vgg.mean_pixels
                 writer.add_summary(summary, global_step=index)
-                print('Step {}\n   Sum: {:5.1f}'.format(index + 1, np.sum(gen_image)))
+                print('Step {}'.format(index + 1))
                 print('   Loss: {:5.1f}'.format(total_loss))
                 print('   Took: {} seconds'.format(time.time() - start_time))
                 start_time = time.time()
 
                 filename = 'output/%d.png' % (index)
-                utils.save_image(filename, gen_image)
 
                 if (index + 1) % 20 == 0:
                     saver.save(sess, 'checkpoints/style_stranfer/style_transfer', index)
 
+                if index == n_iters-1:
+                    gen_image = sess.run(self.input_img)
+                    gen_image = gen_image + self.vgg.mean_pixels
+                    utils.save_image(filename, gen_image)
+
 
 if __name__ == '__main__':
     setup()
-    # machine = StyleTransfer('content/hidelberg.jpg', 'styles/starry_night.jpg', 700, 500)
-    machine = StyleTransfer('/content/projects/style_transfer_project/styles/pattern.jpg',
-                            '/content/projects/style_transfer_project/styles/pattern.jpg', 700, 500)
+    machine = StyleTransfer(path + '/styles/pattern.jpg',
+                            path + '/styles/pattern.jpg', 700, 500)
     machine.build()
-    machine.train(600, 'hidelberg_starry')
+    machine.train(1, 'hidelberg_starry')
+
