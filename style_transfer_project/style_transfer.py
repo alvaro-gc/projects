@@ -188,8 +188,8 @@ class StyleTransfer(object):
 
 if __name__ == '__main__':
     setup()
-    machine = StyleTransfer(path + '/styles/pattern.jpg',
-                            path + '/styles/pattern.jpg', 700, 500)
+    machine = StyleTransfer('/content/projects/style_transfer_project/styles/pattern.jpg',
+                            '/content/projects/style_transfer_project/styles/pattern.jpg', 700, 500)
     machine.build()
     machine.train(1, 'hidelberg_starry')
 
